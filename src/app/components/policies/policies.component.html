@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row pt-3">
+    <div class="col-sm-12">
+      <button pButton type="button" label="Yenile" (click)="refreshData()"></button>
+    </div>
+  </div>
+  <div class="row pt-3">
+    <div class="col-sm-12">
+      <p-table #dt [value]="policies" styleClass="p-datatable-gridlines" responsiveLayout="scroll" [rowHover]="true" [showCurrentPageReport]="true"
+               [loading]="loading">
+        <ng-template pTemplate="caption">
+          <div class="table-header">
+            Poliçeler
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="policyNo">
+              <div class="flex justify-content-between align-items-center">
+                Poliçe No
+                <p-sortIcon field="name"></p-sortIcon>
+              </div>
+            </th>
+            <th pSortableColumn="firstName">Sigortalı <p-sortIcon field="name"></p-sortIcon></th>
+            <th pSortableColumn="productName">Ürün <p-sortIcon field="name"></p-sortIcon></th>
+            <th pSortableColumn="paymentPart">Prim Sayısı <p-sortIcon field="name"></p-sortIcon></th>
+            <th pSortableColumn="paymentAmount">Prim Toplam <p-sortIcon field="name"></p-sortIcon></th>
+            <th pSortableColumn="isPaid">Ödeme Durumu <p-sortIcon field="name"></p-sortIcon></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-policy>
+          <tr>
+            <td>{{policy.policyNo}}</td>
+            <td>{{policy.insrFirstName}} {{policy.insrLastName}}</td>
+            <td>{{policy.productName}}</td>
+            <td>{{policy.paymentPart}} Taksit</td>
+            <td>{{policy.paymentAmount}} TL</td>
+            <td>
+              <div *ngIf="policy.isPaid==1;"><p-tag severity="success">Ödendi</p-tag></div>
+              <div *ngIf="policy.isPaid==0;"><p-tag severity="danger">Ödenmedi</p-tag></div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
